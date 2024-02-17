@@ -1,12 +1,15 @@
 import numpy as np
-from llops import UnaryOps, BinaryOps, TernaryOps, ReduceOps
-from typing import Tuple
+from llops import UnaryOps, BinaryOps, TernaryOps, ReduceOps, LoadOps, MovementOps
+from typing import Union
+
 
 
 # LazyBuffer is like a tensor without derivatives
-class Buffer:  ## add laziness later
-    def __init__(self, device: str, size: int, dtype: np.dtype): ## Create a dtype class later
+class LazyBuffer:  ## add laziness later
+    def __init__(self, buf: np.array): ## Create a dtype class later
         self = self
-        self.device = device
-        self.size = size
-        self.dtype = dtype
+        self._np = buf
+    def realized(self): return self._np
+    
+    def execute(self, op:Union[UnaryOps, BinaryOps, TernaryOps, ReduceOps, LoadOps, MovementOps]):
+        return self 
