@@ -12,7 +12,7 @@ class LoadOps(Enum): pass
 
 Op = Union[UnaryOps, BinaryOps, ReduceOps]
 
-def e(Op, i):
+def e(Op, *i):
     if Op == UnaryOps.EXP2: return math.exp(i[0] * math.log(2)) # is this correct?
     if Op == UnaryOps.SIN: return math.sin(i[0])
     if Op == UnaryOps.SQRT: return math.sqrt(i[0])
